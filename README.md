@@ -17,32 +17,29 @@
 ## Overview
 
 ### The challenge
+This application uses a third-party API, OpenWeather One Call to access weather data. I use the fetch method with specific parameters for the API call. The data is used to build a  weather dashboard that runs in the browser and feature dynamically updated HTML and CSS using javaScript and jQuery.
 
-This app uses CSS, HTML, and Javascript to create a password based on criteria the user specifies. The user can indicate the password length, characters types, such as alphanumeric or special characters. It also handles exception to prevent user errors during prompt input.
+Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
 
 ### User Story
 
-AS AN employee with access to sensitive data
-I WANT to randomly generate a password that meets certain criteria
-SO THAT I can create a strong password that provides greater security
+AS A traveler
+I WANT to see the weather outlook for multiple cities
+SO THAT I can plan a trip accordingly
 
 ### Acceptance Criteria
 
-GIVEN I need a new, secure password
-WHEN I click the button to generate a password
-THEN I am presented with a series of prompts for password criteria
-WHEN prompted for password criteria
-THEN I select which criteria to include in the password
-WHEN prompted for the length of the password
-THEN I choose a length of at least 8 characters and no more than 128 characters
-WHEN asked for character types to include in the password
-THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-WHEN I answer each prompt
-THEN my input should be validated and at least one character type should be selected
-WHEN all prompts are answered
-THEN a password is generated that matches the selected criteria
-WHEN the password is generated
-THEN the password is either displayed in an alert or written to the page
+GIVEN a weather dashboard with form inputs
+WHEN I search for a city
+THEN I am presented with current and future conditions for that city and that city is added to the search history
+WHEN I view current weather conditions for that city
+THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+WHEN I view the UV index
+THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+WHEN I view future weather conditions for that city
+THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+WHEN I click on a city in the search history
+THEN I am again presented with current and future conditions for that city
 
 ### Screenshot
 
@@ -58,13 +55,14 @@ THEN the password is either displayed in an alert or written to the page
 ### Built with
 
 - Javascript
+- jQuery
 - CSS
 - HTML5
 
 
 ### What I learned
 
-I experimented with random numbers and creating/calling functions. I also worked with event listeners.  
+The main lesson from this app is using api keys to make api calls and dynamically rendering the selected data to the browser. 
 
 
 ```Javascript
@@ -74,5 +72,5 @@ generateBtn.addEventListener("click", writePassword);
 
 ## Author
 
-- Website - [Robert M Greene]( https://monkonjay.github.io/Portforlio-Page/)
+- Website - [Robert M Greene]( https://monkonjay.github.io/Portfolio/)
 - Github - [Monkonjay](https://github.com/Monkonjay)
