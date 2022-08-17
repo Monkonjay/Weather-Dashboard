@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dishboard</title>
+
+    <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/style.css"/>
+</head>
+<body>
+    <div id="header" class="card bg-success">
+        <div class="card-header">
+          <h1>Weather Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" id="searchDiv">
+                <h4>Enter City:</h4>
+
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" id="citySearched" placeholder="Fresno" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-success" id="searchBtn">search</button>
+                </div>
+
+                <hr class="hr hr-blurry" />
+
+                <div id="searchHistory"></div>
+            </div>
+
+
+            <div class="col-md-10" id="weatherDiv">
+                <section>
+                    <div class="card" id="todayForecast">
+                        <div class="card-header" id="currentCity">
+                            <span id="featured-city"></span>
+                            <span id="date"></span>
+                            <span id="icon"></span>
+                        </div>   
+                        <div class="card-body">
+                                <div id="temperature" class="card-text"></div>      
+                                <div id="wind" class="card-text"></div>  
+                                <div id="humidity" class="card-text"> </div>  
+                                <div id="uvIndex" class="card-text"> </div>  
+                        </div>   
+                    </div>        
+                                         
+                </section>
+
+                <section>
+                    <div><h5>5-Day Forecast</h5></div>   
+
+                    <div class="row" id="fiveDayforecast">
+                        <div class="col-md-2.4">
+                            <div class="card" id="fiveDayCard"></div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/script.js"></script>
+</body>
+</html>
+
+
+
+<!-- 
+<div class="row" id="fiveDayforcast">
+    <div class="col-md-2.4">
+        <div class="card">
+        <h6 class="card-header bg-warning">Jul 13th 2002</h6>
+        <div class="card-body">
+            <p id="temperature" class="card-text">Temperature: 75 s F</p>      
+            <p id="wind" class="card-text">6 mph</p>  
+            <p id="humidity" class="card-text"> </p>  
+            <p id="uvIndex" class="card-text"> </p>  
+        </div>
+        </div>
+    </div>                  
+</div> -->
