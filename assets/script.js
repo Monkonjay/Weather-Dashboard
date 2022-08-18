@@ -2,7 +2,8 @@
 const APIKey = '9fbe80c13b6b732c188bcdc2593b068c'
 
 // store the current date
-const currentDate = moment().format("ddd MMM Do");
+let currentDate = moment().format("MM/DD/YYYY");   
+// let currentDate = moment().format("ddd MMM Do");
 
 // target HTML elements
 const searchBtnEl = $("#searchBtn");
@@ -13,16 +14,17 @@ let cardHeaderEl= $(".card-header");
 
 let latitude = '';
 let longitude = '';
+let nameOfCity = '';
 let featuredCityEl = $("#featured-city");
 let dateEl = $("#date");
 let iconEl = $("#icon");
 let weatherDivEl = $("#weatherDiv");
-let temperatureEl = $("#cur-temp");
+let temperatureEl = $("#temperature");
 let windEl = $("#wind");
 let humidityEl = $("#humidity");
 let uvIndexEl = $("#uvIndex");
-let fiveDayForecastEl = $("#fiveDayforecast");
-let fiveDayCardEl = $("#fiveDayCard");
+let fiveDayForecastEl = $("#fiveDayForecast");
+// let fiveDayCardEl = $("#fiveDayCard");
 
 
 
@@ -48,10 +50,10 @@ function storeCity(city) {
       return
     }
     let cityArray = JSON.parse(localStorage.cities);
-    searchedEl.empty()
+    searchHistoryEl.empty()
     for (let i = 0; i < cityArray.length ; i++) {
-      cityBtn = $("<button>").text(cityArray[i]).addClass("btn btn-city");
-      searchHistoryEl.append(cityBtn);
+      historyBtn = $("<button>").text(cityArray[i]).addClass("btn btn-city bg-success");
+      searchHistoryEl.append(historyBtn);
     
     }
 }
@@ -60,20 +62,22 @@ function storeCity(city) {
 
 function getCityCoordinates(targetCity) {
 //   API url to get the city coordinates
-  var cityCordinatesUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${targetCity}&limit=1&units=imperial&appid=${APIKey}`;
+  var cityCordinatesUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${targetCity}&limit=1&units=imperial&appid=${APIKey}`;
 
-  fetch(cityCordinatesUrl)
+  return fetch(cityCordinatesUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        // console.log(data);
         latitude = data[0].lat;
-        longitude = data[0].lat;
-        let nameOfCity = data[0].name;
-        citySearchedEl.text = nameOfCity;
+        longitude = data[0].lon;
+        nameOfCity = data[0].name;
+        featuredCityEl.text(nameOfCity);
+        citySearchedEl.text(nameOfCity);
 
-        return (latitude, longitude, nameOfCity);
+        storeCity(nameOfCity);
+        return (latitude, longitude, data[0].name);
     })
     .catch(function(){
         alert("Sorry, City not found");
@@ -126,31 +130,56 @@ function getForecast(lat,lon) {
 function getFiveDayForecast(data) {
   
     fiveDayForecastEl.empty();
-    laterDates = date;
+    laterDates = currentDate;
     for (let i = 0; i < 5; i++) {
-    //   let forecastCard = $("<div class='card sm-card d-inline col-lg-4 m-5'>");
+      let fiveDayCard = $("<div class='card col-md-2.4'>");
       let fiveDayCardHeader = $("<div class='card-header bg-warning'>");
       let fiveDayCardBody = $("<div class='card-body'>");
       
-      laterDates = moment(laterDates).add(1, 'd').format("ddd MMM Do");
+      laterDates = moment(laterDates).add(1, 'd').format("MM/DD/YYYY");
       fiveDayCardHeader.text(laterDates);
+      // console.log(laterDates);
      
-      let icon = data.daily[i].weather[0].icon;
+      // let icon = data.daily[i].weather[0].icon;
       let temperature = data.daily[i].temp.day;    
       let wind = data.daily[i].wind_speed;
       let humidity = data.daily[i].humidity;    
          
-      fiveDayCardBody.replaceWith(forecastCardBody);
-      fiveDayCardBody.append(`<img src="./assets/css/icons/${icon}.png"> <br>`).css({"text-align":"center"});
+      fiveDayCardBody.replaceWith(fiveDayCardBody);
+      // fiveDayCardBody.append(`<img src="./assets/css/icons/${icon}.png"> <br>`).css({"text-align":"center"});
       fiveDayCardBody.append(`Temperature: ${temperature} °F <br>`);
       fiveDayCardBody.append(`Wind Speed: ${wind} m/h <br>`);
       fiveDayCardBody.append(`Humidity: ${humidity} %`);
   
-    //   fiveDayForecastEl.append(forecastCard);
-      fiveDayCardEl.append(fiveDayCardHeader);
-      fiveDayCardEl.append(fiveDayCardBody);    
+      fiveDayForecastEl.append(fiveDayCard);
+      fiveDayCard.append(fiveDayCardHeader);
+      fiveDayCard.append(fiveDayCardBody);    
     }
 }
+
+
+
+/* <div class="row" id="fiveDayforcast">
+    <div class="col-md-2.4">
+        <div class="card">
+        <h6 class="card-header bg-warning">Jul 13th 2002</h6>
+        <div class="card-body">
+            <p id="temperature" class="card-text">Temperature: 75 s F</p>      
+            <p id="wind" class="card-text">6 mph</p>  
+            <p id="humidity" class="card-text"> </p>  
+            <p id="uvIndex" class="card-text"> </p>  
+        </div>
+        </div>
+    </div>                  
+</div>  */
+
+
+
+
+
+
+
+
 
 
 // Add click envent to searchBtn
@@ -162,27 +191,17 @@ searchBtnEl.click(function(e){
   
     if (userCity){
         getCityCoordinates(userCity)
-        .then((data) => {
+        // .then((data) => {
+        .then(function(data) {
             if (data.length) {
-                dateEl.text(`(${date})`); 
+                dateEl.text(`(${currentDate})`); 
                 //   $("#cur-icon").remove();
                 weatherDivEl.removeClass("d-none");
                 weatherDivEl.addClass("d-block");
-  
-                getForecast(latitude,longitude);
+                
+                storeCity(data[0].name);
+                getForecast(latitude,longitude,nameOfCity);
             }
         });
     }  
 })
-
-
-
-
-
-
-
-
-
-
-
-

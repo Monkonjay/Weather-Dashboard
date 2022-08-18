@@ -43,8 +43,13 @@ body {
 }
 
 .btn-city {
-    background-color: #66829b;
-    color: #70e417;
+    /* background-color: #66829b; */
+    color: aliceblue;
     font-weight: bold;
-    width: 80%;
+    width: 100%;
+  }
+
+  #currentCity {
+    font-weight: bold;
+    font-size: 1.5em;
   }
