@@ -130,7 +130,7 @@ function getFiveDayForecast(data) {
     laterDates = currentDate;
     for (let i = 0; i < 5; i++) {
       let fiveDayCard = $("<div class='card col-md-2.4'>");
-      let fiveDayCardHeader = $("<div class='card-header bg-warning'>");
+      let fiveDayCardHeader = $("<div class='card-header text-center bg-warning'>").css("font-weight","Bold");
       let fiveDayCardBody = $("<div class='card-body'>");
       
       laterDates = moment(laterDates).add(1, 'd').format("MM/DD/YYYY");
