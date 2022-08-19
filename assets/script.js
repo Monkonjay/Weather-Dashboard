@@ -3,7 +3,7 @@ const APIKey = '9fbe80c13b6b732c188bcdc2593b068c'
 
 // store the current date
 let currentDate = moment().format("MM/DD/YYYY");   
-// let currentDate = moment().format("ddd MMM Do");
+
 
 // target HTML elements
 const searchBtnEl = $("#searchBtn");
@@ -24,9 +24,6 @@ let windEl = $("#wind");
 let humidityEl = $("#humidity");
 let uvIndexEl = $("#uvIndex");
 let fiveDayForecastEl = $("#fiveDayForecast");
-// let fiveDayCardEl = $("#fiveDayCard");
-
-
 
 
 // save searched cities to local storage 
@@ -57,7 +54,6 @@ function storeCity(city) {
     
     }
 }
-
 
 
 function getCityCoordinates(targetCity) {
@@ -101,13 +97,14 @@ function getForecast(lat,lon) {
         let currentWindSpeed = data.current.wind_speed;
         let currentHumidity = data.current.humidity;
         let currentUvIndex = data.current.uvi
-        // let currentWeatherIcon = data.current.weather[0].icon;
+        let currentWeatherIcon = data.current.weather[0].icon;
         
         let UVSpan = $("<span>")
-        // let iconImageEl = $("<img id='cur-icon'>");
+        let iconImageEl = $("<img id='condition-icon'>");
         // iconImageEl.attr('src', `./assets/css/icons/${curWeatherIcon}.png`);
-        // iconImageEl.replaceWith(iconImageEl);
-        // iconImageEl.appendTo(curIconEl);
+        iconImageEl.attr('src', `https://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png`); 
+        iconImageEl.replaceWith(iconImageEl);
+        iconImageEl.appendTo(iconEl);
   
         temperatureEl.text(`Temperature: ${currentTemp} °F`)
         windEl.text(`Wind Speed: ${currentWindSpeed} mph`)
@@ -140,13 +137,15 @@ function getFiveDayForecast(data) {
       fiveDayCardHeader.text(laterDates);
       // console.log(laterDates);
      
-      // let icon = data.daily[i].weather[0].icon;
+      let icon = data.daily[i].weather[0].icon;
       let temperature = data.daily[i].temp.day;    
       let wind = data.daily[i].wind_speed;
       let humidity = data.daily[i].humidity;    
          
       fiveDayCardBody.replaceWith(fiveDayCardBody);
-      // fiveDayCardBody.append(`<img src="./assets/css/icons/${icon}.png"> <br>`).css({"text-align":"center"});
+      fiveDayCardBody.append(`<img src="https://openweathermap.org/img/wn/${icon}@2x.png"> <br>`).css({"text-align":"center"});
+      
+
       fiveDayCardBody.append(`Temperature: ${temperature} °F <br>`);
       fiveDayCardBody.append(`Wind Speed: ${wind} m/h <br>`);
       fiveDayCardBody.append(`Humidity: ${humidity}%`);
@@ -164,14 +163,13 @@ searchBtnEl.click(function(e){
   
     let userCity = citySearchedEl.val();
     citySearchedEl.val('');
-  
     if (userCity){
         getCityCoordinates(userCity)
         // .then((data) => {
         .then(function(data) {
             if (data.length) {
                 dateEl.text(`(${currentDate})`); 
-                //   $("#cur-icon").remove();
+                  $("#condition-icon").remove();
                 weatherDivEl.removeClass("d-none");
                 weatherDivEl.addClass("d-block");
                 
@@ -183,8 +181,7 @@ searchBtnEl.click(function(e){
 })
 
 
-
-// click event for seachHistory to get coordinates and weather
+// click event for seachHistory to get city coordinates and weather
 searchHistoryEl.click(function(e){
   e.preventDefault();
   if (e.target.classList.contains("btn-city")) {
@@ -195,7 +192,7 @@ searchHistoryEl.click(function(e){
         if (data.length) {
           console.log(data);
           dateEl.text(`(${currentDate})`); 
-          // $("#cur-icon").remove();
+          $("#condition-icon").remove();
           weatherDivEl.removeClass("d-none");
           weatherDivEl.addClass("d-block");
   
