@@ -158,27 +158,6 @@ function getFiveDayForecast(data) {
 }
 
 
-
-
-
-
-
-/* <div class="row" id="fiveDayforcast">
-    <div class="col-md-2.4">
-        <div class="card">
-        <h6 class="card-header bg-warning">Jul 13th 2002</h6>
-        <div class="card-body">
-            <p id="temperature" class="card-text">Temperature: 75 s F</p>      
-            <p id="wind" class="card-text">6 mph</p>  
-            <p id="humidity" class="card-text"> </p>  
-            <p id="uvIndex" class="card-text"> </p>  
-        </div>
-        </div>
-    </div>                  
-</div>  */
-
-
-
 // Add click envent to searchBtn
 searchBtnEl.click(function(e){
     e.preventDefault();

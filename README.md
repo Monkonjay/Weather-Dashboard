@@ -19,7 +19,7 @@
 ### The challenge
 This application uses a third-party API, OpenWeather One Call to access weather data. I use the fetch method with specific parameters for the API call. The data is used to build a  weather dashboard that runs in the browser and feature dynamically updated HTML and CSS using javaScript and jQuery.
 
-Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
+
 
 ### User Story
 
@@ -56,7 +56,7 @@ THEN I am again presented with current and future conditions for that city
 
 - Javascript
 - jQuery
-- CSS
+- CSS Bootstrap
 - HTML5
 
 
@@ -66,7 +66,8 @@ The main lesson from this app is using api keys to make api calls and dynamicall
 
 
 ```Javascript
-generateBtn.addEventListener("click", writePassword);
+  // API url to get the city coordinates
+  var cityCordinatesUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${targetCity}&limit=1&units=imperial&appid=${APIKey}`;
 ```
 
 
