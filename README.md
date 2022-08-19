@@ -47,8 +47,8 @@ THEN I am again presented with current and future conditions for that city
 
 ### Links
 
-- Solution URL: [Prefessional README Generator](https://github.com/Monkonjay/Password-Generator.git)
-- Live Site: [Test the Project](https://monkonjay.github.io/Password-Generator/)
+- Solution URL: [Weather Dashboard](https://github.com/Monkonjay/Weather-Dashboard)
+- Live Site: [Test the Project](https://monkonjay.github.io/Weather-Dashboard/)
 
 ## My process
 
