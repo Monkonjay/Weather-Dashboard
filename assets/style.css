@@ -37,9 +37,12 @@ body {
     margin-bottom: 25px;
 }
 
-#fiveDayforcast {
-    justify-content: space-evenly;
-    margin-top: 15px
+#fiveDayForecast {
+    justify-content: space-between;
+    
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-city {

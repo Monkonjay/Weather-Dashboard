@@ -69,7 +69,7 @@ function getCityCoordinates(targetCity) {
       return response.json();
     })
     .then(function (data) {
-        // console.log(data);
+        console.log(data);
         latitude = data[0].lat;
         longitude = data[0].lon;
         nameOfCity = data[0].name;
@@ -111,7 +111,7 @@ function getForecast(lat,lon) {
   
         temperatureEl.text(`Temperature: ${currentTemp} °F`)
         windEl.text(`Wind Speed: ${currentWindSpeed} mph`)
-        humidityEl.text(`Humidity: ${currentHumidity} %`)
+        humidityEl.text(`Humidity: ${currentHumidity}%`)
         uvIndexEl.text(`UV Index: `)
         UVSpan.text(currentUvIndex)
         UVSpan.appendTo(uvIndexEl)
@@ -149,13 +149,17 @@ function getFiveDayForecast(data) {
       // fiveDayCardBody.append(`<img src="./assets/css/icons/${icon}.png"> <br>`).css({"text-align":"center"});
       fiveDayCardBody.append(`Temperature: ${temperature} °F <br>`);
       fiveDayCardBody.append(`Wind Speed: ${wind} m/h <br>`);
-      fiveDayCardBody.append(`Humidity: ${humidity} %`);
+      fiveDayCardBody.append(`Humidity: ${humidity}%`);
   
       fiveDayForecastEl.append(fiveDayCard);
       fiveDayCard.append(fiveDayCardHeader);
       fiveDayCard.append(fiveDayCardBody);    
     }
 }
+
+
+
+
 
 
 
@@ -172,13 +176,6 @@ function getFiveDayForecast(data) {
         </div>
     </div>                  
 </div>  */
-
-
-
-
-
-
-
 
 
 
@@ -205,3 +202,29 @@ searchBtnEl.click(function(e){
         });
     }  
 })
+
+
+
+// click event for seachHistory to get coordinates and weather
+searchHistoryEl.click(function(e){
+  e.preventDefault();
+  if (e.target.classList.contains("btn-city")) {
+    let userSearch = e.target.textContent;
+    if (userSearch){
+      getCityCoordinates(userSearch)
+      .then((data) => {
+        if (data.length) {
+          console.log(data);
+          dateEl.text(`(${currentDate})`); 
+          // $("#cur-icon").remove();
+          weatherDivEl.removeClass("d-none");
+          weatherDivEl.addClass("d-block");
+  
+          getForecast(latitude,longitude);
+        }
+      });
+    }  
+  }
+})
+
+getCities();
