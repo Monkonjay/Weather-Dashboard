@@ -31,7 +31,9 @@ function storeCity(city) {
     let cityArray = []
     if (localStorage.cities) {
       cityArray = JSON.parse(localStorage.cities);
+      
     }
+    console.log(localStorage.cities);
     
     if (cityArray.includes(city)) {
       return
@@ -129,7 +131,7 @@ function getFiveDayForecast(data) {
     fiveDayForecastEl.empty();
     laterDates = currentDate;
     for (let i = 0; i < 5; i++) {
-      let fiveDayCard = $("<div class='card col-md-2.4'>");
+      let fiveDayCard = $("<div class='card d5 col-md-2.4'>");
       let fiveDayCardHeader = $("<div class='card-header text-center bg-warning'>").css("font-weight","Bold");
       let fiveDayCardBody = $("<div class='card-body'>");
       
