@@ -24,6 +24,7 @@ let windEl = $("#wind");
 let humidityEl = $("#humidity");
 let uvIndexEl = $("#uvIndex");
 let fiveDayForecastEl = $("#fiveDayForecast");
+const clearBtnEl = $("#clearBtn");
 
 
 // save searched cities to local storage 
@@ -173,6 +174,7 @@ searchBtnEl.click(function(e){
                 dateEl.text(`(${currentDate})`); 
                   $("#condition-icon").remove();
                 weatherDivEl.removeClass("d-none");
+                clearBtnEl.removeClass("d-none");
                 weatherDivEl.addClass("d-block");
                 
                 storeCity(data[0].name);
@@ -204,5 +206,12 @@ searchHistoryEl.click(function(e){
     }  
   }
 })
+
+
+// clear local storage
+clearBtnEl.on('click', function () {
+  localStorage.removeItem('cities');
+  window.location.reload(true);
+});
 
 getCities();

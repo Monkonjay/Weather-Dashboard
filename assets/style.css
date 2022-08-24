@@ -49,7 +49,7 @@ margin-bottom: 20px;
 /* padding: 10px; */
 }
 
-.btn-city {
+.btn-city, #clearBtn {
     /* background-color: #66829b; */
     color: aliceblue;
     font-weight: bold;
